@@ -5,9 +5,11 @@
 ### Documentation:
 
 Official User Guide: [Arm Cortex-M3 DesignStart FPGA-Xilinx edition User Guide](https://developer.arm.com/documentation/101483/0000/example-software-design/software-update-flow/generating-bit-and-flash-files)<br>
+(This is good detailed documentation - you should be able to figure everything out from here)<br>
 
 ### Shoutouts:
 
+Geek Til It Herz Tutorial:  [Design Start Arm Cortex M3 on Arty A7 FPGA](https://www.youtube.com/watch?v=fxsgE5ZfrvQ&ab_channel=GeekTillItHertz)<br>
 Element14 Tutorials:<br>
 [Getting up and running with Arm Design Start](https://www.element14.com/community/blogs/Exploring_the_Programmable_World/2018/11/19/getting-up-and-running-with-arm-design-start)<br>
  [Getting up and running with Arm Design Start, Generating the SW](https://www.element14.com/community/blogs/Exploring_the_Programmable_World/2018/12/19/getting-up-and-running-with-arm-design-start-generating-the-sw)<br>
@@ -75,7 +77,7 @@ Flip the switches and press the buttons - LEDs changing means that default softw
 ### Keil Software Flow:
 
 #### Prerequisites:
-Install ARM Keil v5:  https://developer.arm.com/ip-products/designstart
+Register with ARM and install ARM Keil v5:  https://developer.arm.com/ip-products/designstart
 
 From Vivado, run these TCL commands to update the m3.mmi file:  
 	```cd V:/hardware/m3_for_arty_a7/m3_for_arty_a7```<br>
