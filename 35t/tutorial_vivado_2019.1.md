@@ -90,7 +90,7 @@ From Vivado, run these TCL commands to update the m3.mmi file:
 - No need to include the bitstream file
 
 Select File->Launch SDK:<br>
-![Launch SDK](img/1-Launch_SDK.png)
+<kbd>![Launch SDK](img/1-Launch_SDK.png)</kbd>
 
 (Vivado SDK should open)
 
@@ -100,22 +100,22 @@ In SDK:
 - Create a Board Support Package:
 - Select File->New->Board Support Package
 - Leave everything as default and hit Finish:<br>
-![New BSP Step 1](img/2-New_BSP.png)
+<kbd>![New BSP Step 1](img/2-New_BSP.png)</kbd>
 
 - Change the OS Version to 6.7
 - Click OK, BSP will auto-build:<br>
-![New BSP Step 2](img/3-New_BSP2.png)
+<kbd>![New BSP Step 2](img/3-New_BSP2.png)</kbd>
 
 - Open V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xparameters.h
 - Look for STDIN_BASEADDRESS and STDOUT_BASEADDRESS
 - *You won't find them, SDK is lying to you.*
 
 - Close system.mss and re-open it, you should see Version 6.7 now:<br>
-![Modify BSP Settings](img/4-Modify_BSP_Settings.png)
+<kbd>![Modify BSP Settings](img/4-Modify_BSP_Settings.png)</kbd>
 
  - Click "Modify this BSP's Settings", go to "standalone" tab
  - Change Value column for stdin and stdout to be "axi_uartlite_0":<br>
-![Fixed BSP Settings](img/5-Fixed_BSP_Settings.png)
+<kbd>![Fixed BSP Settings](img/5-Fixed_BSP_Settings.png)</kbd>
  
  - Press "OK"<br>
  (SDK should automatically rebuild the project)<br>
