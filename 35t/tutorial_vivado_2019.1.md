@@ -69,7 +69,7 @@ Select options from the left-side Flow Navigator bar:
 -   Open Hardware Manager
 -   Program device with generated bitstream V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.runs\impl_1\m3_for_arty_a7_wrapper.bit
 
-Flip the switches and press the buttons - LEDs changing means that default software is running on the M3 core and handling interrupts properly.
+Flip the switches and press the buttons - LEDs changing means that default software is running on the M3 core and handling interrupts properly!
 
 
 ### Keil Software Flow:
@@ -82,8 +82,10 @@ From Vivado, run these TCL commands to update the m3.mmi file:
 	```source make_mmi_file.tcl```<br>
 (any time you re-generate the bitstream you should re-run these steps)
 
--   Select File->Export->Export Hardware, include bitstream
--   Export to V:\software (no need to include the bitstream file)
+- Select File->Export->Export Hardware, include bitstream
+- Set "Exported location" to V:\software
+- Set "Workspace" to V:/software/m3_for_arty_a7/sdk_workspace
+- No need to include the bitstream file
 
 Select File->Launch SDK:<br>
 ![Launch SDK](img/1-Launch_SDK.png)
@@ -99,24 +101,24 @@ In SDK:
 ![New BSP Step 1](img/2-New_BSP.png)
 
 - Change the OS Version to 6.7
-- Click OK, BSP will auto-build:<br> 
+- Click OK, BSP will auto-build:<br>
 ![New BSP Step 2](img/3-New_BSP2.png)
 
 - Open V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xparameters.h
 - Look for STDIN_BASEADDRESS and STDOUT_BASEADDRESS
 - *You won't find them, SDK is lying to you.*
 
-Close system.mss and re-open it, you should see Version 6.7 now:<br>
+- Close system.mss and re-open it, you should see Version 6.7 now:<br>
 ![Modify BSP Settings](img/4-Modify_BSP_Settings.png)
 
  - Click "Modify this BSP's Settings", go to "standalone" tab
  - Change Value column for stdin and stdout to be "axi_uartlite_0":<br>
 ![Fixed BSP Settings](img/5-Fixed_BSP_Settings.png)
  
- - Press "OK"
- - (SDK should automatically rebuild the project)
- - Check xparameters.h - *now* you should see STDIN_BASEADDRESS and STDOUT_BASEADDRESS
- - *(If you program the bitfile at the end of all this and the Arty is unresponsive, come back and check this again)*
+ - Press "OK"<br>
+ (SDK should automatically rebuild the project)<br>
+ - Check xparameters.h - *now* you should see STDIN_BASEADDRESS and STDOUT_BASEADDRESS<br>
+ - *(If you program the bitfile at the end of all this and the Arty is unresponsive, come back and check this again)*<br>
 
 ### Generating the ELF with Keil:
 
@@ -126,14 +128,15 @@ V:\vivado\Arm_sw_repository\CortexM\bsp\standalone_v6_7\src\arm\cortexm3\armcc<b
 to<br>
 V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include<br>
 
-Go to V:\software\m3_for_arty_a7\Build_Keil and double-click m3_for_arty_a7.uvprojx<br>
+- Go to V:\software\m3_for_arty_a7\Build_Keil<br>
+- Double-click m3_for_arty_a7.uvprojx<br>
 (This should run Keil and load the project)
   
-- Select Project->Rebuild All Target Files
-- Open a CMD window
-- cd to v:\hardware\m3_for_arty_a7\m3_for_arty_a7
-- Run script make_prog_files.bat  
-- (This will run Vivado in the background and update the contents of the BRAM which contain your compiled Cortex application)
+- Select Project->Rebuild All Target Files<br>
+- Open a CMD window<br>
+- cd to v:\hardware\m3_for_arty_a7\m3_for_arty_a7<br>
+- Run script make_prog_files.bat<br>
+(This will run Vivado in the background and update the contents of the BRAM which contain your compiled Cortex application)<br>
 
 ### Re-program the Arty
 
@@ -142,7 +145,7 @@ Go to V:\software\m3_for_arty_a7\Build_Keil and double-click m3_for_arty_a7.uvpr
 
 (If you have problems, you can program V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7_reference.bit to re-check the flow)
 
-Now you should have the stock ARM M3 Cortex example design running with the compiled example software.
+Now you should have the stock ARM M3 Cortex example design running with the compiled example software!
 
 In the next tutorial we'll go through how to add our own ARM AXI slave device to the design with some additional custom RTL and add code to the Cortex application that accesses the new peripheral. 
 
