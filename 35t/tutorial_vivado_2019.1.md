@@ -80,10 +80,11 @@ From Vivado, run these TCL commands to update the m3.mmi file:
 	```cd V:/hardware/m3_for_arty_a7/m3_for_arty_a7```
 	```source make_mmi_file.tcl```
 (any time you re-generate the bitstream you should re-run these steps)
+
 -   Select File->Export->Export Hardware, include bitstream
 -   Export to V:\software (no need to include the bitstream file)
 
-Select File->Launch SDK:
+Select File->Launch SDK:<br>
 ![Launch SDK](img/1-Launch_SDK.png)
 
 (Vivado SDK should open)
@@ -93,29 +94,28 @@ In SDK:
 - Make sure V:\vivado\Arm_sw_repository is listed under "Global Repositories"
 - Create a Board Support Package:
 - Select File->New->Board Support Package
-- Leave everything as default and hit Finish:
+- Leave everything as default and hit Finish:<br>
 ![New BSP Step 1](img/2-New_BSP.png)
 
 - Change the OS Version to 6.7
-- Click OK, BSP will auto-build:
+- Click OK, BSP will auto-build:<br> 
 ![New BSP Step 2](img/3-New_BSP2.png)
 
 - Open V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xparameters.h
 - Look for STDIN_BASEADDRESS and STDOUT_BASEADDRESS
-- *You won't find them*
-(SDK is lying to you.)
+- *You won't find them, SDK is lying to you.*
 
-Close system.mss and re-open it, you should see Version 6.7 now:
+Close system.mss and re-open it, you should see Version 6.7 now:<br>
 ![Modify BSP Settings](img/4-Modify_BSP_Settings.png)
 
-Click "Modify this BSP's Settings", go to "standalone" tab
-Change Value column for stdin and stdout to be "axi_uartlite_0":
+ - Click "Modify this BSP's Settings", go to "standalone" tab
+ - Change Value column for stdin and stdout to be "axi_uartlite_0":<br>
 ![Fixed BSP Settings](img/5-Fixed_BSP_Settings.png)
-
-Press "OK"
-(SDK should automatically rebuild the project)
-Check xparameters.h - *now* you should see STDIN_BASEADDRESS and STDOUT_BASEADDRESS
-*(If you program the bitfile at the end of all this and the Arty is unresponsive, come back and check this again)*
+ 
+ - Press "OK"
+ - (SDK should automatically rebuild the project)
+ - Check xparameters.h - *now* you should see STDIN_BASEADDRESS and STDOUT_BASEADDRESS
+ - *(If you program the bitfile at the end of all this and the Arty is unresponsive, come back and check this again)*
 
 ### Generating the ELF with Keil:
 
@@ -126,26 +126,24 @@ to
 V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include
 
 Go to V:\software\m3_for_arty_a7\Build_Keil and double-click m3_for_arty_a7.uvprojx
-
 (This should run Keil and load the project)
   
-Select Project->Rebuild All Target Files
-
+- Select Project->Rebuild All Target Files
 - Open a CMD window
 - cd to v:\hardware\m3_for_arty_a7\m3_for_arty_a7
 - Run script make_prog_files.bat  
-(This will run Vivado in the background and update the contents of the BRAM which contain your compiled Cortex application)
+- (This will run Vivado in the background and update the contents of the BRAM which contain your compiled Cortex application)
 
 ### Re-program the Arty
 
-Go back to Vivado, select Hardware Manager
-Program V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.bit
+- Go back to Vivado, select Hardware Manager
+- Program V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.bit
 
 (If you have problems, you can program V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7_reference.bit to re-check the flow)
 
 Now you should have the stock ARM M3 Cortex example design running with the compiled example software.
 
-In the next tutorial we'll go through how to add our own AXI slave device, add some custom RTL, re-compile and program it onto the Arty. 
+In the next tutorial we'll go through how to add our own ARM AXI slave device to the design with some additional custom RTL and add code to the Cortex application that accesses the new peripheral. 
 
 Take Care!
 -Charley
