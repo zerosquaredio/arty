@@ -94,6 +94,7 @@ Flip the switches and press the buttons - LEDs changing means that default softw
 #### Prerequisites:
 Register with ARM and install ARM Keil v5:  https://developer.arm.com/ip-products/designstart
 
+#### Vivado:
 - Go back to Vivado
 - Select "Open Implemented Design" from the left-side menu (this may take a minute)
 - Run these TCL commands to update the m3.mmi file:<br>
@@ -109,10 +110,11 @@ Register with ARM and install ARM Keil v5:  https://developer.arm.com/ip-product
 Select File->Launch SDK:<br>
 <kbd>![Launch SDK](img/1-Launch_SDK.png)</kbd>
 
-(Vivado SDK should open)
+(Xilinx SDK should open)
 
-In SDK:
- - Select Xilinx->Repositories
+#### Xilinx SDK:
+In SDK window:
+- Select Xilinx->Repositories
 - Make sure V:\vivado\Arm_sw_repository is listed under "Global Repositories"
 - Create a Board Support Package:
 - Select File->New->Board Support Package
