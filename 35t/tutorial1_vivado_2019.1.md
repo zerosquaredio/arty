@@ -99,7 +99,7 @@ From Vivado, run these TCL commands to update the m3.mmi file:
 	```source make_mmi_file.tcl```<br>
 (any time you re-generate the bitstream you should re-run these steps)
 
-- Select File->Export->Export Hardware, include bitstream
+- Select File->Export->Export Hardware
 - Set "Exported location" to V:\software
 - Set "Workspace" to V:/software/m3_for_arty_a7/sdk_workspace
 - No need to include the bitstream file
