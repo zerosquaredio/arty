@@ -18,7 +18,7 @@ Element14 Tutorials:<br>
 ### Goals:
 1.  Test out the connection to the Arty board, use the Xilinx tools to program it with a provided bitstream file.
 2.  Set up the Arm Cortex-M3 example design, use the Xilinx tools to compile it into a new bitstream file.
-3.  Test out the Arm Keil toolflow, verify that we can compile the firmware provided with the Cortex-M3.
+3.  Test out the Arm Keil toolflow, verify that we can compile Cortex-M3 example firmware.
 4.  Test that we can merge our compiled firmware into our new bitstream and load successfully onto the Arty.
 
 ### Prerequisite:
