@@ -7,6 +7,7 @@
 Official User Guide: [Arm Cortex-M3 DesignStart FPGA-Xilinx edition User Guide](https://developer.arm.com/documentation/101483/0000/example-software-design/software-update-flow/generating-bit-and-flash-files)<br>
 (This is good detailed documentation - you should be able to figure everything out from here)<br>
 
+
 ### Shoutouts:
 
 Geek Til It Herz Tutorial:  [Design Start Arm Cortex M3 on Arty A7 FPGA](https://www.youtube.com/watch?v=fxsgE5ZfrvQ&ab_channel=GeekTillItHertz)<br>
@@ -14,12 +15,16 @@ Element14 Tutorials:<br>
 [Getting up and running with Arm Design Start](https://www.element14.com/community/blogs/Exploring_the_Programmable_World/2018/11/19/getting-up-and-running-with-arm-design-start)<br>
  [Getting up and running with Arm Design Start, Generating the SW](https://www.element14.com/community/blogs/Exploring_the_Programmable_World/2018/12/19/getting-up-and-running-with-arm-design-start-generating-the-sw)<br>
 
-  
+### Goals:
+1.  Test out the connection to the Arty board, use the Xilinx tools to program it with a provided bitstream file.
+2.  Set up the Arm Cortex-M3 example design, use the Xilinx tools to compile it into a new bitstream file.
+3.  Test out the Arm Keil toolflow, verify that we can compile the firmware provided with the Cortex-M3.
+4.  Test that we can merge our compiled firmware into our new bitstream and load successfully onto the Arty.
 
 ### Prerequisite:
 Register with http://www.xilinx.com, download and install Xilinx Vivado 2019.1
 
-(This is the last major version before they began changing Vivado SDK to Vitis)
+(2019.1 is the last major version before Xilinx began changing Vivado SDK to Vitis, and the UI matches the 2018 version used in the M3 tutorials and documentation)
 
    
 ### Getting Prepared:
@@ -48,14 +53,16 @@ C:\fpga\ARM_Cortex_M3_2019.1\hardware\m3_for_arty_a7\testbench\Micron_N25Q128A13
 	- Execute the installer, point it at C:\fpga\ARM_Cortex_M3_2019.1\hardware\m3_for_arty_a7\testbench
 	- It should create directory C:\fpga\ARM_Cortex_M3_2019.1:\hardware\m3_for_arty_a7\testbench\S25fl128s
 
-### Run Vivado 2019.1
 
+### Program Arty with Provided M3 Bitstream:
+
+Run Vivado 2019.1
 Once open, run these TCL commands:
 	```set_param board.repoPaths C:/fpga/ARM_Cortex_M3_2019.1/vivado/Digilent```<br>
 	```cd C:/fpga/ARM_Cortex_M3_2019.1/```<br>
 	```exec subst V: .```<br>
 
-They tell Vivado the location of your board files and set up a virtual V: drive which points to your ARM Cortex directory. 
+These commands tell Vivado the location of your board files and set up a virtual V: drive which points to your ARM Cortex directory. 
 
 Select Tools->Settings->IP Defaults<br>
 Add ```C:/fpga/ARM_Cortex_M3_2020.1/vivado/Arm_ipi_repository``` to Default IP Repository Search Paths
@@ -63,13 +70,21 @@ Add ```C:/fpga/ARM_Cortex_M3_2020.1/vivado/Arm_ipi_repository``` to Default IP R
 Select File->Open, select project file V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.xpr<br>
 If everything is set up properly, you should not see any error or warning popup messages.
 
+Open Hardware Manager
+Program device with generated bitstream V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7_reference.bit
+
+Flip the switches and press the buttons - LEDs changing means that default software is running on the M3 core and handling interrupts properly!
+
+
+### Xilinx Synthesis Flow:
+
 Select options from the left-side Flow Navigator bar: 
 -   Open Block Design
 -   Run Synthesis
 -   Run Implementation
 -   Generate Bitsteam
 -   Open Hardware Manager
--   Program device with generated bitstream V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.runs\impl_1\m3_for_arty_a7_wrapper.bit
+-   Program device with the new generated bitstream V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.runs\impl_1\m3_for_arty_a7_wrapper.bit
 
 Flip the switches and press the buttons - LEDs changing means that default software is running on the M3 core and handling interrupts properly!
 
@@ -122,6 +137,7 @@ In SDK:
  - Check xparameters.h - *now* you should see STDIN_BASEADDRESS and STDOUT_BASEADDRESS<br>
  - *(If you program the bitfile at the end of all this and the Arty is unresponsive, come back and check this again)*<br>
 
+
 ### Generating the ELF with Keil:
 
 Copy files xpseudo_asm_rvct.c and xpseudo_asm_rvct.h<br>
@@ -135,12 +151,14 @@ V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include<br
 (This should run Keil and load the project)
   
 - Select Project->Rebuild All Target Files<br>
+
+
+### Merge ELF into Bitstream, Re-program Arty
+
 - Open a CMD window<br>
 - cd to v:\hardware\m3_for_arty_a7\m3_for_arty_a7<br>
 - Run script make_prog_files.bat<br>
 (This will run Vivado in the background and update the contents of the BRAM which contain your compiled Cortex application)<br>
-
-### Re-program the Arty
 
 - Go back to Vivado, select Hardware Manager
 - Program V:\hardware\m3_for_arty_a7\m3_for_arty_a7\m3_for_arty_a7.bit
@@ -149,11 +167,11 @@ V:\software\m3_for_arty_a7\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include<br
 
 Now you should have the stock ARM M3 Cortex example design running with the compiled example software!
 
-In the next tutorial we'll go through how to add our own ARM AXI slave device to the design with some additional custom RTL and add code to the Cortex application that accesses the new peripheral. 
+In the next tutorial we'll cover how to add your own ARM AXI slave device to the design with some custom RTL and add code for the new AXI peripheral to the Cortex application. 
 
 Take Care!<br>
 -Charley<br>
-10/7/2020<br>
+10/16/2020<br>
 
 
 
