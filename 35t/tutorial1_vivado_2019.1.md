@@ -57,7 +57,7 @@ C:\fpga\ARM_Cortex_M3_2019.1\hardware\m3_for_arty_a7\testbench\Micron_N25Q128A13
 ### Program Arty with Provided M3 Bitstream:
 
 Run Vivado 2019.1
-Once open, run these TCL commands:
+Once open, run these TCL commands:<br>
 	```set_param board.repoPaths C:/fpga/ARM_Cortex_M3_2019.1/vivado/Digilent```<br>
 	```cd C:/fpga/ARM_Cortex_M3_2019.1/```<br>
 	```exec subst V: .```<br>
@@ -94,7 +94,9 @@ Flip the switches and press the buttons - LEDs changing means that default softw
 #### Prerequisites:
 Register with ARM and install ARM Keil v5:  https://developer.arm.com/ip-products/designstart
 
-From Vivado, run these TCL commands to update the m3.mmi file:  
+- Go back to Vivado
+- Select "Open Implemented Design" from the left-side menu (this may take a minute)
+Run these TCL commands to update the m3.mmi file:<br>
 	```cd V:/hardware/m3_for_arty_a7/m3_for_arty_a7```<br>
 	```source make_mmi_file.tcl```<br>
 (any time you re-generate the bitstream you should re-run these steps)
