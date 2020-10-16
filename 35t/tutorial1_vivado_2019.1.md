@@ -96,7 +96,7 @@ Register with ARM and install ARM Keil v5:  https://developer.arm.com/ip-product
 
 - Go back to Vivado
 - Select "Open Implemented Design" from the left-side menu (this may take a minute)
-Run these TCL commands to update the m3.mmi file:<br>
+- Run these TCL commands to update the m3.mmi file:<br>
 	```cd V:/hardware/m3_for_arty_a7/m3_for_arty_a7```<br>
 	```source make_mmi_file.tcl```<br>
 (any time you re-generate the bitstream you should re-run these steps)
